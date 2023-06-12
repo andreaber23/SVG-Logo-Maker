@@ -13,9 +13,10 @@ class SvgLogo{
     setTextEl(color, text) {
         this.svgString = `<text x="150" y="125" font-size="40" text-anchor="middle" fill="${color}">${text}</text>`;
       };
-    setShapeEl(shape){
-        this.shapeEl = shape.render()
-    }
+      setShapeEl(shape) {
+        shape.setColor(this.shapeColor);
+        this.shapeEl = shape.render();
+      }
 }
 
 function createSvgFile(data) {
@@ -56,26 +57,34 @@ function promptUser() {
 
 promptUser().then((answers) => {
     const { text, textColor, shape, shapeColor } = answers;
-
+  
     const logo = new SvgLogo();
     logo.setTextEl(textColor, text);
-
-  switch (shape) {
-    case 'Circle':
-      logo.setShapeEl(new Circle(shapeColor));
-      break;
-    case 'Square':
-      logo.setShapeEl(new Square(shapeColor));
-      break;
-    case 'Triangle':
-      logo.setShapeEl(new Triangle(shapeColor));
-      break;
-    default:
-      console.log('Invalid shape');
-      return;
-  }
-  const svgContent = logo.render();
-  createSvgFile(svgContent);
-}).catch((err) => {
-  console.error('Error:', err);
-});
+    logo.shapeColor = shapeColor;
+  
+    switch (shape) {
+      case 'Circle':
+        logo.setShapeEl(new Circle());
+        break;
+      case 'Square':
+        logo.setShapeEl(new Square());
+        break;
+      case 'Triangle':
+        logo.setShapeEl(new Triangle());
+        break;
+      default:
+        console.log('Invalid shape');
+        return;
+    }
+    const svgContent = logo.render();
+    createSvgFile(svgContent);
+  }).catch((err) => {
+    console.error('Error:', err);
+  });
+  
+  
+  
+  
+  
+  
+  
