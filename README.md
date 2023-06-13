@@ -1,5 +1,4 @@
 # SVG-Logo-Maker
-# Professional Readme Generator
 
 ## Description
 This SVG logo maker will help any user to create a quick logo only using this simple generator.
